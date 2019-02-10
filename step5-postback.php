@@ -10,16 +10,34 @@
   $sender_replyToken = $json_obj->events[0]->replyToken; //取得訊息的replyToken
   
   $response = array (
-    "replyToken" => $sender_replyToken,
-    "messages" => array (
-      array (
-        "type" => "text",
-        "text" => "Hello. You say". $sender_txt
-      )
-    )
+		"replyToken" => $sender_replyToken,
+		"messages" => array (
+			array (
+				"type" => "template",
+				"altText" => "this is a buttons template",
+				"template" => array (
+					"type" => "buttons",
+					"thumbnailImageUrl" => "https://www.w3schools.com/css/paris.jpg",
+					"title" => "Menu",
+					"text" => "Please select",
+					"actions" => array (
+						array (
+							"type" => "postback",
+							"label" => "Buy",
+							"data" => "action=buy&itemid=123"
+						),
+						array (
+							"type" => "postback",
+							"label" => "Add to cart",
+							"data" => "action=add&itemid=123"
+						)
+					)
+				)
+	  	)
+		)
   );
-  
- fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
+			
+  fwrite($myfile, "\xEF\xBB\xBF".json_encode($response)); //在字串前面加上\xEF\xBB\xBF轉成utf8格式
   $header[] = "Content-Type: application/json";
   $header[] = "Authorization: Bearer gd1gyH+Pc5TROu9ku5u/5tDvFnffsU8nXU69zXuhTgE0dIS5nVGmx9Js8PwijeUqgFuwWXzyJ14/N5FUmp/UXsmSJbUsxMGA6AW1gozlf6cbEgSGLiC02BEaRa5wUSqE7df8FOANP1WjPW8Mh/TgtwdB04t89/1O/w1cDnyilFU=";
   $ch = curl_init("https://api.line.me/v2/bot/message/reply");

@@ -49,7 +49,7 @@
     $result = json_decode(curl_exec($ch));
 
     $result_ary = explode("\n",$result -> responses[0] -> fullTextAnnotation -> text);
-    fwrite($myfile, "\xEF\xBB\xBF".json_encode($result));
+    //fwrite($myfile, "\xEF\xBB\xBF".json_encode($result -> responses[0] -> fullTextAnnotation -> text));
 
     $ans_txt = "這張發票沒用了，你又製造了一張垃圾";
     foreach ($result_ary as $val) {
@@ -62,9 +62,9 @@
         "replyToken" => $sender_replyToken,
         "messages" => array (
             array (
-            "type" => "text",
-            //"text" => $ans_txt
-            "text" => $result -> responses[0] -> fullTextAnnotation -> text
+                "type" => "text",
+                "text" => $ans_txt
+            //"text" => $result -> responses[0] -> fullTextAnnotation -> text
             )
         )
     );

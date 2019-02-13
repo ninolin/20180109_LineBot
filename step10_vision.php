@@ -28,7 +28,7 @@
             array (
                 "image" => array (
                     "source" => array (
-                        "imageUri" => "159.65.4.103/cht20190214/learning/".$imageId.".jpeg"
+                        "imageUri" => "https://159.65.4.103/cht20190214/learning/".$imageId.".jpeg"
                     )
                 ),
                 "features" => array (
@@ -47,8 +47,9 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);                                                                                                   
     $result = json_decode(curl_exec($ch));
-    fwrite($myfile, "\xEF\xBB\xBF".json_encode($result));
+    
     $result_ary = mb_split("\n",$result -> responses[0] -> fullTextAnnotation -> text);
+    fwrite($myfile, "\xEF\xBB\xBF".json_encode($result -> responses[0] -> fullTextAnnotation -> text));
     $ans_txt = "這張發票沒用了，你又製造了一張垃圾";
     foreach ($result_ary as $val) {
         if($val == "MB-76164441"){

@@ -47,10 +47,10 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);                                                                                                   
     $result = json_decode(curl_exec($ch));
-    
-    $result_ary = mb_split("\n",$result -> responses[0] -> fullTextAnnotation -> text);
-    fwrite($myfile, "\xEF\xBB\xBF".json_encode($result -> responses[0]));
-   // fwrite($myfile, "aaaaa");
+
+    $result_ary = explode("\n",$result -> responses[0] -> fullTextAnnotation -> text);
+    fwrite($myfile, "\xEF\xBB\xBF".json_encode($result));
+
     $ans_txt = "這張發票沒用了，你又製造了一張垃圾";
     foreach ($result_ary as $val) {
         if($val == "MB-76164441"){

@@ -28,7 +28,7 @@
             array (
                 "image" => array (
                     "source" => array (
-                        "imageUri" => "https://www.sporzfy.com/cht20190214/learning/".$imageId.".jpeg"
+                        "imageUri" => "http://159.65.4.103/cht20190214/learning/".$imageId.".jpeg"
                     )
                 ),
                 "features" => array (
